@@ -1,1 +1,1 @@
-Datastar is a third tier product resting on top of VIVO and VITRO.  This is intended to be a dataset registry implementation that uses RDF/triples to express relationships between datasets, projects, people, and publications.
+Datastar is a third tier product resting on top of VIVO and VITRO.  This is intended to be a dataset registry implementation that uses RDF/triples to express relationships between datasets, projects, people, and publications.  This project was funded by the IMLS.
