@@ -1,0 +1,89 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* This file is to put in any css elements that I am manipulating - these may be removed but this isolates any
+changes I would like to see*/
+
+.embeddedResultsDiv {
+	float:left;
+}
+
+.embeddedResultsContent {
+	background-color:#4B5361;
+	color:#FFFFFF;
+	padding: 7px 15px;
+	margin: 0px 10px 0px 0px;
+	border:1px solid #000000;
+	height:90px;
+	width: 145px;
+}
+
+.embeddedResultsLink {
+	
+}
+
+/*For breaking out the text as it is in the mockup*/
+.embeddedResultsDivText {
+	text-align:center;
+}
+
+.embeddedResultsDivText .singleNumber {
+	font-size: 40px;
+	font-weight:bold;
+}
+
+.embeddedResultsContainer {
+	clear:both;
+}
+
+.embeddedResultsDiv .resultCell{
+	border:none !important;
+	width:80px;
+}
+
+.embeddedResultsDiv h4 {
+	margin:0.4em 0;
+}
+
+/**Overriding styles from vitro.css**/
+
+ul.dropdown {
+	height:30px !important;
+}
+
+ul.dropdown ul.sub_menu {
+	font-size:1em !important;
+	height:auto !important;
+}
+
+ul.dropdown li#user-menu a {
+	margin-right:8px !important;
+	margin-left:5px !important;
+}
+
+ul.dropdown ul.sub_menu li a {
+	height: auto !important;
+}
+
+
+/**Overriding styles from normalize.css**/
+h3 {
+	margin:0em 0em !important;
+}
+
+/***Overriding styles from menupage.css and normalize.css for class group pages ***/
+ul#browse-classes {
+	width: 200px !important;
+	padding-left:0px !important;
+}
+
+ul#alpha-browse-individuals {
+	padding-left:0px !important; /*Overriding instant 40px left from normalize.css for menu, ol, and ul*/
+}
+
+#individuals-in-class {
+	width:629px !important;
+}
+
+#individuals-in-class h1 {
+	font-size:1em !important;
+}
+

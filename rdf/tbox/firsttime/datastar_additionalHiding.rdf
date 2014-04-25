@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY datastarCore "http://purl.org/datastar/" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY skos2 "http://www.w3.org/2008/05/skos#" >
+    <!ENTITY obo "http://purl.obolibrary.org/obo/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY core "http://vivoweb.org/ontology/core#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY cito "http://purl.org/spar/cito/" >
+	<!ENTITY andsvivo "http://purl.org/ands/ontologies/vivo/" >
+    
+    
+]>
+
+<rdf:RDF xml:base="http://www.semanticweb.org/owl/owlapi/turtle"
+	xmlns:obo="http://purl.obolibrary.org/obo/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:skos2="http://www.w3.org/2008/05/skos#"
+	xmlns:datastarCore="http://purl.org/datastar/" xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:core="http://vivoweb.org/ontology/core#" xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:cito="http://purl.org/spar/cito/"
+	xmlns:andsvivo="http://purl.org/ands/ontologies/vivo/">
+
+	
+	<rdf:Description rdf:about="&datastarCore;hasStudyDesign">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+			rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody" />
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot
+			rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody" />
+		</rdf:Description>
+	
+
+	<!--/////////////////////////// BIBO //////////////////// -->
+
+	
+	<rdf:Description rdf:about="http://purl.org/ontology/bibo/translator">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	
+	<!--/////////////////////////// OBO/OBI //////////////////// -->
+	<!-- We want to hide all these properties, they should be handled by custom forms wherever possible -->
+	<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000058">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0000136">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0000142">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0000219">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	
+	
+		<!--/////////////////////////// VIVO //////////////////// -->
+	
+	
+	<!-- Hiding geographic focus properties since have coverage for both temporal and geographic elements -->
+	
+	<rdf:Description rdf:about="http://vivoweb.org/ontology/core#domesticGeographicFocus">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicFocus">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://vivoweb.org/ontology/core#internationalGeographicFocus">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://vivoweb.org/ontology/core#features">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	<rdf:Description rdf:about="http://vivoweb.org/ontology/core#informationProductOf">
+		<vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+		<vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+	</rdf:Description>
+	
+	
+</rdf:RDF>

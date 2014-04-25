@@ -1,0 +1,134 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix datastarCore: <http://purl.org/datastar/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.org/datastar/> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+
+###################Datastar Properties################################
+<http://purl.org/datastar/Dataset> rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty datastarCore:description ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ];
+                                   rdfs:subClassOf [rdf:type owl:Restriction;
+                                   					owl:onProperty datastarCore:isPartOf;
+                                   					owl:allValuesFrom datastarCore:Collection] .
+                                                           
+<http://purl.org/datastar/Investigation> rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty datastarCore:isInvestigationPartOf ;
+                                                             owl:allValuesFrom  <http://vivoweb.org/ontology/core#Project>
+                                                           ];
+                                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty datastarCore:description ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ] .
+                                                           
+<http://vivoweb.org/ontology/core#Project>  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty datastarCore:hasInvestigationPart ;
+                                                             owl:allValuesFrom  <http://purl.org/datastar/Investigation>
+                                                           ] .   
+datastarCore:Repository  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty datastarCore:description ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ] .                                                          
+datastarCore:Collection rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty datastarCore:description ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ] .
+###################CiTO Properties################################
+
+## is compiled by, isCitedForInformationBy, providesDataFor, provides conclusions for, is cited as data source by, is documented by
+## and their inverse properties : were the OLD properties being utilized, but was deemed overwhelming/confusing for users
+## Instead, utilizing isCitedAsDataSourceBy, isDocumentedBy and inverse properties
+
+
+##These restrictions should enable these properties to also show up on the dataset profile
+##This does not mean that these properties cannot ALSO be utilized by document
+## Or some other entity
+<http://purl.org/datastar/Dataset> rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty cito:isCitedAsDataSourceBy ;
+                                                             owl:allValuesFrom bibo:Document
+                                                           ].
+                                                           
+##An investigation could provide conclusions that could then be documented in a document
+##A dataset would technically not be providing conclusions but rather the data itself
+## We are currently hiding this property
+##datastarCore:Investigation rdfs:subClassOf [ rdf:type owl:Restriction ;
+##                                                             owl:onProperty cito:isDocumentedBy ;
+##                                                             owl:allValuesFrom bibo:Document
+##                                                           ] .                                                          
+                                                           
+##From the point of view of applicability of cito:documents, this is not exactly true
+## but for our context, we are utilizing documents primarily for investigations and documents    
+
+##We are currently hiding documents and is documented by
+<http://purl.org/ontology/bibo/Document>  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty cito:citesAsDataSource ;
+                                                             owl:allValuesFrom datastarCore:Dataset
+                                                           ]  .
+                                                           
+##rdfs:subClassOf [ rdf:type owl:Restriction ;
+##                                                             owl:onProperty cito:documents ;
+##                                                             owl:allValuesFrom datastarCore:Investigation
+##                                                           ];                                                                  
+###################Bibo Properties################################
+
+## Making various bibo identifier data properties applicable to datasets
+
+datastarCore:Dataset rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty bibo:handle ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ];
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty bibo:doi ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ];
+                     rdfs:subClassOf  [ rdf:type owl:Restriction ;
+                                                             owl:onProperty bibo:upc ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ];
+                     rdfs:subClassOf  [ rdf:type owl:Restriction ;
+                                                             owl:onProperty bibo:uri ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ]    .            
+                                                           
+###################ANDS VIVO Properties################################
+datastarCore:Dataset rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty <http://purl.org/ands/ontologies/vivo/purl> ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ] .
+################### VIVO/VCard Properties################################
+         
+datastarCore:Repository  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                								owl:allValuesFrom <http://www.w3.org/2006/vcard/ns#Kind> ;
+                								owl:onProperty <http://purl.obolibrary.org/obo/ARG_2000028>
+              							] . 
+datastarCore:Dataset rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty <http://purl.org/ands/ontologies/vivo/purl> ;
+                                                             owl:allValuesFrom rdfs:Literal
+                                                           ] .
+datastarCore:Dataset rdfs:subClassOf [ rdf:type owl:Restriction ;
+                											owl:onProperty <http://purl.obolibrary.org/obo/ARG_2000028> ;
+                											owl:allValuesFrom [ rdf:type owl:Class;
+                												owl:intersectionOf  ( <http://www.w3.org/2006/vcard/ns#Kind>
+                													[	rdf:type owl:Restriction;
+                														owl:onProperty <http://www.w3.org/2006/vcard/ns#hasURL>;
+                														owl:allValuesFrom datastarCore:DatasetURLLink
+                													])
+                												]
+                                                           ] .   
+datastarCore:Metadata rdfs:subClassOf [ rdf:type owl:Restriction ;
+                											owl:onProperty <http://purl.obolibrary.org/obo/ARG_2000028> ;
+                											owl:allValuesFrom [ rdf:type owl:Class;
+                												owl:intersectionOf  ( <http://www.w3.org/2006/vcard/ns#Kind>
+                													[	rdf:type owl:Restriction;
+                														owl:onProperty <http://www.w3.org/2006/vcard/ns#hasURL>;
+                														owl:allValuesFrom datastarCore:MetadataURLLink
+                													])
+                												]
+                                                           ] .                                                        
+################### OBI Properties################################

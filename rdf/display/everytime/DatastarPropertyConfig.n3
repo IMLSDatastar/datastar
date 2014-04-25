@@ -1,0 +1,307 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix datagetter: <java:edu/cornell/mannlib/vitro/webapp/utils/datagetter/> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix role:  <http://vitro.mannlib.cornell.edu/ns/vitro/role#> .
+@prefix local: <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> . 
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+
+@base <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration> .
+
+# These are specifically extensions for Datastar
+# warning: don't use blank nodes; the display model doesn't currently support them.
+
+# The qualified by domain will need to be changed when the ontology changes
+local:webpageDatasetContext a :ConfigContext ;
+    :hasConfiguration local:webpageDatasetConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/datastar/Dataset> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageDatasetConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-dataWebpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForDatasetGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+    
+##VIVO has configuration specifically for information content entity, here we will take the sibling classes of data item (superclass of dataset)
+##and assign the information content entity generato to them
+## Information Content Entity subclasses that are siblings to Data Item:
+## Classes are: Collection, Contact, Database, Datum Label, Directive Information Entity, Document, and Service
+## Document currently has VIVO dataset as a subclass, which means the faux property for that overrides dataset
+## For that reason, the faux property info will be hardcoded for now but the ontology should be revisited
+local:webpageInfoCollectionContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Collection> ; # Collection
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageInfoContactContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/ARG_2000379> ; # Contact
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageInfoCollectionContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/ERO_0001716> ; # Database
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+    
+local:webpageInfoCollectionContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000009> ; # Datum Label
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageInfoCollectionContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000033> ; # Directive Information Entity
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageInfoCollectionContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/ERO_0000005> ; # Service
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+
+###########################Subclasses of Document that are siblings to VIVO research dataset
+local:webpageAbstractContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Abstract> ; # Abstract
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageArticleContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Article> ; # Article
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .   
+local:webpageAudioDocumentContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/AudioDocument> ; # AudioDocument
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageAudioVisualDocumentContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/AudioVisualDocument> ; # AudioVisualDocument
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageBookContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Book> ; # Book
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageCaseStudyContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#CaseStudy> ; # CaseStudy
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageCatalogContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Catalog> ; # Catalog
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageClinicalGuidelineContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/spar/fabio/ClinicalGuideline> ; # ClinicalGuideline
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageCollectedDocumentContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/CollectedDocument> ; # CollectedDocument
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageCommentContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/spar/fabio/Comment> ; # Comment
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageConferencePosterContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#ConferencePoster> ; # ConferencePoster
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageDocumentPartContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/DocumentPart> ; # DocumentPart
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageErratumContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/spar/fabio/Erratum> ; # Erratum
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageImageContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Image> ; # Image
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageLegalDocumentContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/LegalDocument> ; # LegalDocument
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageManualContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Manual> ; # Manual
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageManuscriptContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Manuscript> ; # Manuscript
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageNewsReleaseContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#NewsRelease> ; # News Release
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageNoteContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Note> ; # Note
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpagePatentContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Patent> ; # Patent
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .  
+local:webpagePersonalCommunicationDocumentContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/PersonalCommunicationDocument> ; # Personal Communication Document
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .  
+local:webpageProtocolContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/OBI_0000272> ; # Protocol
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .  
+local:webpageReferenceSourceContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/ReferenceSource> ; # ReferenceSource
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .  
+local:webpageReportContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Report> ; # Report
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .  
+local:webpageResearchProposalContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#ResearchProposal> ; # ResearchProposal
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .     
+local:webpageScoreContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Score> ; # Score
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+local:webpageScreenplayContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Screenplay> ; # Screenplay
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+local:webpageSlideshowContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Slideshow> ; # Slideshow
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+local:webpageSpeechContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Speech> ; # Speech
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+local:webpageSlideshowContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Slideshow> ; # Slideshow
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+local:webpageStandardContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Standard> ; # Standard
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+local:webpageThesisContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Thesis> ; # Thesis
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .    
+local:webpageTranslationContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Translation> ; # Translation
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .   
+local:webpageWebpageContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Webpage> ; # Webpage
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .   
+ local:webpageWorkingPaperContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#WorkingPaper> ; # WorkingPaper
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .        
+    
+    
+#This configuration will be used by all classes that are subclasses of information content entity excluding data item (superclass of dataset)
+#and textual entity (doesn't make sense there)
+local:webpageInfoConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .    

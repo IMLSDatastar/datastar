@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- Custom list view config file for core:webpage
+    
+     See guidelines in vitro/doc/list_view_configuration_guidelines.txt 
+     The postprocessor at the end ensures that all the required statements are returned,
+     otherwise statements that repeat the metadata object would not all be returned
+     
+     --> 
+
+<list-view-config>
+    <query-select>            
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt; 
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+		PREFIX datastarCore: &lt;http://purl.org/datastar/&gt;
+		PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+		PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+		PREFIX obo: 	&lt;http://purl.obolibrary.org/obo/&gt; 
+		
+        SELECT ?metadata
+        		?link 
+               (afn:localname(?link) AS ?linkName) 
+               ?label
+               ?url 
+               ?rank 
+               ?format WHERE {
+            ?subject ?property ?metadata .
+            ?metadata obo:ARG_2000028 ?vcard .
+            ?vcard vcard:hasURL ?link  
+            OPTIONAL { ?link rdfs:label ?label }
+            OPTIONAL { ?link vcard:url ?url }
+            OPTIONAL { ?link core:rank ?rank }
+            OPTIONAL { ?metadata datastarCore:associatedMetadataFormat ?format }
+            
+        <critical-data-required>
+        FILTER ( bound(?url) )    
+        </critical-data-required>
+        } ORDER BY ?rank ?label
+    </query-select>
+
+    <query-construct>  
+    PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt; 
+        PREFIX obo: 	&lt;http://purl.obolibrary.org/obo/&gt; 
+        CONSTRUCT {
+            ?subject ?property ?metadata .
+            ?metadata obo:ARG_2000028 ?vcard .
+            ?vcard vcard:hasURL ?link .
+            ?link ?linkProp ?linkObj
+        } WHERE {
+            { 
+                ?subject ?property ?metadata .
+                ?metadata obo:ARG_2000028 ?vcard .
+            	?vcard vcard:hasURL ?link .
+            } UNION {
+                 ?subject ?property ?metadata .
+            	?metadata obo:ARG_2000028 ?vcard .
+            	?vcard vcard:hasURL ?link .
+            	?link ?linkProp ?linkObj
+            } 
+        }
+    </query-construct>
+    
+    <template>propStatement-hasAssociatedMetadata.ftl</template>
+    <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
+    
+</list-view-config>

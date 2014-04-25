@@ -1,0 +1,60 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix datastarCore: <http://purl.org/datastar/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.org/datastar/> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+
+
+###Repositories####
+
+datastarCore:ECommonsRepository a datastarCore:Repository;
+rdfs:label "eCommons";
+<http://vivoweb.org/ontology/core#webpage> datastarCore:ECommonsURLLink .
+
+datastarCore:CugirRepository a datastarCore:Repository;
+rdfs:label "CUGIR";
+<http://vivoweb.org/ontology/core#webpage> datastarCore:CugirURLLink .
+
+datastarCore:KnbRepository a datastarCore:Repository;
+rdfs:label "KnB";
+<http://vivoweb.org/ontology/core#webpage> datastarCore:KnbURLLink .
+
+datastarCore:DryadRepository a datastarCore:Repository;
+rdfs:label "Dryad";
+<http://vivoweb.org/ontology/core#webpage> datastarCore:DryadURLLink .
+
+datastarCore:PangaeaRepository a datastarCore:Repository;
+rdfs:label "PANGAEA";
+<http://vivoweb.org/ontology/core#webpage> datastarCore:PangaeaURLLink .
+
+###Associated data links####
+
+datastarCore:ECommonsURLLink a <http://vivoweb.org/ontology/core#URLLink> ;
+<http://vivoweb.org/ontology/core#webpageOf> datastarCore:ECommonsRepository ;
+<http://vivoweb.org/ontology/core#linkURI> "http://ecommons.cornell.edu/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+<http://vivoweb.org/ontology/core#linkAnchorText>   "Repository URL" .
+
+datastarCore:CugirURLLink a <http://vivoweb.org/ontology/core#URLLink> ;
+<http://vivoweb.org/ontology/core#webpageOf> datastarCore:CugirRepository ;
+<http://vivoweb.org/ontology/core#linkURI> "http://cugir.mannlib.cornell.edu/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+<http://vivoweb.org/ontology/core#linkAnchorText>   "Repository URL" .
+
+datastarCore:KnbURLLink a <http://vivoweb.org/ontology/core#URLLink> ;
+<http://vivoweb.org/ontology/core#webpageOf> datastarCore:KnbRepository ;
+<http://vivoweb.org/ontology/core#linkURI> "http://knb.ecoinformatics.org/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+<http://vivoweb.org/ontology/core#linkAnchorText>   "Repository URL" .
+
+datastarCore:DryadURLLink a <http://vivoweb.org/ontology/core#URLLink> ;
+<http://vivoweb.org/ontology/core#webpageOf> datastarCore:DryadRepository ;
+<http://vivoweb.org/ontology/core#linkURI> "http://datadryad.org/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+<http://vivoweb.org/ontology/core#linkAnchorText>   "Repository URL" .
+
+datastarCore:PangaeaURLLink a <http://vivoweb.org/ontology/core#URLLink> ;
+<http://vivoweb.org/ontology/core#webpageOf> datastarCore:PangaeaRepository ;
+<http://vivoweb.org/ontology/core#linkURI> "http://www.pangaea.de/"^^<http://www.w3.org/2001/XMLSchema#anyURI> ;
+<http://vivoweb.org/ontology/core#linkAnchorText>   "Repository URL" .

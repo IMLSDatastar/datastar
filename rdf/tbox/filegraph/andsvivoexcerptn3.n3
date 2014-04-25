@@ -1,0 +1,298 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vivo: <http://purl.org/ands/ontologies/vivo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.w3.org/2002/07/owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.org/ands/ontologies/vivo/> .
+
+<http://purl.org/ands/ontologies/vivo/> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://purl.org/ands/ontologies/vivo/dateAccepted
+
+vivo:dateAccepted rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:label "date accepted"@en ;
+                  
+                  rdfs:domain vivo:ResearchData ;
+                  
+                  rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/dateAvailable
+
+vivo:dateAvailable rdf:type owl:ObjectProperty ;
+                   
+                   rdfs:label "available"@en ;
+                   
+                   rdfs:domain vivo:ResearchData ;
+                   
+                   rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/dateCreated
+
+vivo:dateCreated rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:label "created"@en ;
+                 
+                 rdfs:domain vivo:ResearchData ;
+                 
+                 rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/dateIssued
+
+vivo:dateIssued rdf:type owl:ObjectProperty ;
+                
+                rdfs:label "issued"@en ;
+                
+                rdfs:domain vivo:ResearchData ;
+                
+                rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/dateModified
+
+vivo:dateModified rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:label "modified"@en ;
+                  
+                  rdfs:domain vivo:ResearchData ;
+                  
+                  rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/dateOfPublication
+
+vivo:dateOfPublication rdf:type owl:ObjectProperty ;
+                       
+                       rdfs:label "date of publication (public release)"@en ;
+                       
+                       rdfs:domain vivo:ResearchData ;
+                       
+                       rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/dateSubmitted
+
+vivo:dateSubmitted rdf:type owl:ObjectProperty ;
+                   
+                   rdfs:label "date submitted"@en ;
+                   
+                   rdfs:domain vivo:ResearchData ;
+                   
+                   rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/dateValid
+
+vivo:dateValid rdf:type owl:ObjectProperty ;
+               
+               rdfs:label "valid"@en ;
+               
+               rdfs:domain vivo:ResearchData ;
+               
+               rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/endPublicationDate
+
+vivo:endPublicationDate rdf:type owl:ObjectProperty ;
+                        
+                        rdfs:label "end publication date"@en ;
+                        
+                        rdfs:domain vivo:ResearchData ;
+                        
+                        rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/hasPointOfContact
+
+vivo:hasPointOfContact rdf:type owl:ObjectProperty ;
+                       
+                       rdfs:label "point of contact"@en ;
+                       
+                       rdfs:comment "An agent who is point of contact for something"^^xsd:string ;
+                       
+                       rdfs:domain vivo:ResearchData ;
+                       
+                       rdfs:subPropertyOf <http://purl.org/dc/terms/relation> ;
+                       
+                       rdfs:range <http://xmlns.com/foaf/0.1/Agent> .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/isPointOfContactFor
+
+vivo:isPointOfContactFor rdf:type owl:ObjectProperty ;
+                         
+                         rdfs:label "is point of contact for"@en ;
+                         
+                         rdfs:comment "This agent is point of contact for something."^^xsd:string ;
+                         
+                         owl:inverseOf vivo:hasPointOfContact ;
+                         
+                         rdfs:subPropertyOf <http://purl.org/dc/terms/relation> ;
+                         
+                         rdfs:domain <http://xmlns.com/foaf/0.1/Agent> .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/startPublicationDate
+
+vivo:startPublicationDate rdf:type owl:ObjectProperty ;
+                          
+                          rdfs:label "start publication date"@en ;
+                          
+                          rdfs:domain vivo:ResearchData ;
+                          
+                          rdfs:range core:DateTimeValue .
+
+
+
+###  http://purl.org/dc/terms/relation
+
+<http://purl.org/dc/terms/relation> rdf:type owl:ObjectProperty .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://purl.org/ands/ontologies/vivo/ark
+
+vivo:ark rdf:type owl:DatatypeProperty ;
+         
+         rdfs:label "ARK identifier"@en ;
+         
+         rdfs:comment "ARK persistent identifier"^^xsd:string ;
+         
+         rdfs:domain vivo:ResearchData ;
+         
+         rdfs:subPropertyOf core:identifier .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/purl
+
+vivo:purl rdf:type owl:DatatypeProperty ;
+          
+          rdfs:label "purl"@en ;
+          
+          rdfs:comment "A Persistent URL"^^xsd:string ;
+          
+          rdfs:subPropertyOf bibo:uri .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/urn
+
+vivo:urn rdf:type owl:DatatypeProperty ;
+         
+         rdfs:label "urn"@en ;
+         
+         rdfs:comment "Uniform Resource Name"^^xsd:string ;
+         
+         rdfs:domain vivo:ResearchData .
+
+
+
+###  http://purl.org/ontology/bibo/uri
+
+bibo:uri rdf:type owl:DatatypeProperty .
+
+
+
+###  http://vivoweb.org/ontology/core#identifier
+
+core:identifier rdf:type owl:DatatypeProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://purl.org/ands/ontologies/vivo/ResearchData
+
+vivo:ResearchData rdf:type owl:Class .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/ResearchDataSet
+
+vivo:ResearchDataSet rdf:type owl:Class ;
+                     
+                     rdfs:label "Reserach Dataset"@en ;
+                     
+                     rdfs:subClassOf vivo:ResearchData ;
+                     
+                     rdfs:comment "collection of physical or digital objects generated by research activities"^^xsd:string .
+
+
+
+###  http://vivoweb.org/ontology/core#DateTimeValue
+
+core:DateTimeValue rdf:type owl:Class .
+
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+
+<http://xmlns.com/foaf/0.1/Agent> rdf:type owl:Class .
+
+
+
+
+###  Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net
+

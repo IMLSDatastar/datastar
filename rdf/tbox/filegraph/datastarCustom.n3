@@ -1,0 +1,587 @@
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix datastarCore: <http://purl.org/datastar/> .
+@base <http://purl.org/datastar/> .
+
+<http://purl.org/datastar/> rdf:type owl:Ontology .
+#;
+                            
+#                            owl:imports <http://purl.obolibrary.org/obo/obi.owl> ,
+#                                        <http://purl.org/ands/ontologies/vivo/> ,
+#                                        <http://purl.org/spar/cito/> .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://www.w3.org/2008/05/skos#scopeNote
+
+<http://www.w3.org/2008/05/skos#scopeNote> rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000051
+
+<http://purl.obolibrary.org/obo/BFO_0000051> owl:inverseOf datastarCore:isPartOf .
+
+
+
+###  http://purl.org/datastar/geographicCoverage
+
+datastarCore:geographicCoverage rdf:type owl:ObjectProperty ;
+                                
+                                rdfs:subPropertyOf <http://vivoweb.org/ontology/core#geographicFocus> .
+
+
+
+###  http://purl.org/datastar/hasAssociatedMetadata
+
+datastarCore:hasAssociatedMetadata rdf:type owl:ObjectProperty ;
+                                   
+                                   rdfs:domain datastarCore:Dataset ;
+                                   
+                                   rdfs:range datastarCore:Metadata ;
+                                   
+                                   owl:inverseOf datastarCore:isAssociatedMetadataFor .
+
+
+
+###  http://purl.org/datastar/hasDataProduct
+
+datastarCore:hasDataProduct rdf:type owl:ObjectProperty ;
+                            
+                            rdfs:range datastarCore:Dataset ;
+                            
+                            rdfs:subPropertyOf owl:topObjectProperty .
+
+
+
+###  http://purl.org/datastar/hasDerivedDataset
+
+datastarCore:hasDerivedDataset rdf:type owl:ObjectProperty ;
+                               
+                               rdfs:label "has derived dataset" ;
+                               
+                               rdfs:range datastarCore:Dataset ;
+                               
+                               rdfs:domain datastarCore:Dataset ;
+                               
+                               owl:inverseOf datastarCore:isDerivedFrom .
+
+
+
+###  http://purl.org/datastar/hasInvestigation
+
+datastarCore:hasInvestigation rdf:type owl:ObjectProperty ;
+                              
+                              rdfs:label "has investigation" ;
+                              
+                              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                              
+                              rdfs:range [ rdf:type owl:Restriction ;
+                                           owl:onProperty datastarCore:hasInvestigation ;
+                                           owl:allValuesFrom datastarCore:Investigation
+                                         ] .
+
+
+
+###  http://purl.org/datastar/hasMethodStep
+
+datastarCore:hasMethodStep rdf:type owl:ObjectProperty ;
+                           
+                           rdfs:range datastarCore:MethodStep ;
+                           
+                           rdfs:domain datastarCore:Methods .
+
+
+
+###  http://purl.org/datastar/hasMethods
+
+datastarCore:hasMethods rdf:type owl:ObjectProperty ;
+                        
+                        rdfs:domain <http://purl.obolibrary.org/obo/OBI_0000471> ;
+                        
+                        rdfs:range datastarCore:Methods .
+
+
+
+###  http://purl.org/datastar/hasStage
+
+datastarCore:hasStage rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:label "has stage" ;
+                      
+                      rdfs:domain datastarCore:Dataset ;
+                      
+                      rdfs:range datastarCore:DatasetStage .
+
+
+
+###  http://purl.org/datastar/hasStudyDesign
+
+datastarCore:hasStudyDesign rdf:type owl:ObjectProperty ;
+                            
+                            rdfs:label "has study design" ;
+                            
+                            rdfs:range <http://purl.obolibrary.org/obo/OBI_0500000> ;
+                            
+                            rdfs:domain datastarCore:Investigation .
+
+
+
+###  http://purl.org/datastar/hasStudyDesignExecution
+
+datastarCore:hasStudyDesignExecution rdf:type owl:ObjectProperty ;
+                                     
+                                     rdfs:range <http://purl.obolibrary.org/obo/OBI_0000471> ;
+                                     
+                                     rdfs:domain datastarCore:Investigation .
+
+
+
+###  http://purl.org/datastar/isAssociatedMetadataFor
+
+datastarCore:isAssociatedMetadataFor rdf:type owl:ObjectProperty ;
+                                     
+                                     rdfs:range datastarCore:Dataset ;
+                                     
+                                     rdfs:domain datastarCore:Metadata .
+
+
+
+###  http://purl.org/datastar/isDataProductOf
+
+datastarCore:isDataProductOf rdf:type owl:ObjectProperty ;
+                             
+                             rdfs:domain datastarCore:Dataset ;
+                             
+                             owl:inverseOf datastarCore:hasDataProduct ;
+                             
+                             rdfs:subPropertyOf owl:topObjectProperty .
+
+
+
+###  http://purl.org/datastar/isDerivedFrom
+
+datastarCore:isDerivedFrom rdf:type owl:ObjectProperty ;
+                           
+                           rdfs:label "is derived from" ;
+                           
+                           rdfs:domain datastarCore:Dataset ;
+                           
+                           rdfs:range datastarCore:Dataset .
+
+
+
+###  http://purl.org/datastar/isInvestigationPartOf
+
+datastarCore:isInvestigationPartOf rdf:type owl:ObjectProperty ;
+                                   
+                                   rdfs:label "is investigation part of" ;
+                                   
+                                   rdfs:domain datastarCore:Investigation ;
+                                   
+                                   owl:inverseOf datastarCore:hasInvestigation .
+
+
+
+###  http://purl.org/datastar/isPartOf
+
+datastarCore:isPartOf rdf:type owl:ObjectProperty .
+
+
+
+###  http://purl.org/datastar/publishedToRepository
+
+datastarCore:publishedToRepository rdf:type owl:ObjectProperty ;
+                                   
+                                   rdfs:label "published to repository" ;
+                                   
+                                   rdfs:domain datastarCore:Dataset ;
+                                   
+                                   rdfs:range datastarCore:Repository .
+
+
+
+###  http://purl.org/datastar/registrationDateTimeValue
+
+datastarCore:registrationDateTimeValue rdf:type owl:ObjectProperty ;
+                                       
+                                       rdfs:domain datastarCore:Dataset ;
+                                       
+                                       rdfs:range <http://vivoweb.org/ontology/core#DateTimeValue> .
+
+
+
+###  http://purl.org/datastar/repositoryHasDataset
+
+datastarCore:repositoryHasDataset rdf:type owl:ObjectProperty ;
+                                  
+                                  rdfs:range datastarCore:Dataset ;
+                                  
+                                  rdfs:domain datastarCore:Repository ;
+                                  
+                                  owl:inverseOf datastarCore:publishedToRepository .
+
+
+
+###  http://purl.org/datastar/temporalCoverage
+
+datastarCore:temporalCoverage rdf:type owl:ObjectProperty ;
+                              
+                              rdfs:range [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://vivoweb.org/ontology/core#DateTimeInterval>
+                                                         <http://vivoweb.org/ontology/core#DateTimeValue>
+                                                       )
+                                         ] .
+
+
+
+###  http://vivoweb.org/ontology/core#dateTimeInterval
+
+<http://vivoweb.org/ontology/core#dateTimeInterval> rdf:type owl:ObjectProperty .
+
+
+
+###  http://vivoweb.org/ontology/core#dateTimeValue
+
+<http://vivoweb.org/ontology/core#dateTimeValue> rdf:type owl:ObjectProperty .
+
+
+
+###  http://vivoweb.org/ontology/core#geographicFocus
+
+<http://vivoweb.org/ontology/core#geographicFocus> rdf:type owl:ObjectProperty .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://purl.org/datastar/associatedMetadataFormat
+
+datastarCore:associatedMetadataFormat rdf:type owl:DatatypeProperty ;
+                                      
+                                      rdfs:label "associated metadata format" ;
+                                      
+                                      rdfs:comment "if associated metadata exists and has a specific format, that information can be entered here. " ;
+                                      
+                                      rdfs:domain datastarCore:Metadata ;
+                                      
+                                      rdfs:subPropertyOf owl:topDataProperty .
+
+
+
+###  http://purl.org/datastar/dataFileFormat
+
+datastarCore:dataFileFormat rdf:type owl:DatatypeProperty ;
+                            
+                            rdfs:label "data file format" ;
+                            
+                            rdfs:comment "this is a place to record what file formats may have been employed for the dataset files" ;
+                            
+                            rdfs:domain datastarCore:DatasetURLLink .
+
+
+
+###  http://purl.org/datastar/description
+
+datastarCore:description rdf:type owl:DatatypeProperty .
+
+
+
+###  http://purl.org/datastar/hasHypothesis
+
+datastarCore:hasHypothesis rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:domain datastarCore:Investigation .
+
+
+
+###  http://purl.org/datastar/hasOrder
+
+datastarCore:hasOrder rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:domain datastarCore:MethodStep ;
+                      
+                      rdfs:range rdfs:Literal .
+
+
+
+###  http://purl.org/datastar/hasRightsAndRestrictions
+
+datastarCore:hasRightsAndRestrictions rdf:type owl:DatatypeProperty ;
+                                      
+                                      rdfs:domain datastarCore:Dataset .
+
+
+
+###  http://purl.org/datastar/hasValue
+
+datastarCore:hasValue rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:domain datastarCore:MethodStep ;
+                      
+                      rdfs:range rdfs:Literal .
+
+
+
+###  http://purl.org/datastar/hasVersion
+
+datastarCore:hasVersion rdf:type owl:DatatypeProperty ;
+                        
+                        rdfs:domain datastarCore:Dataset ;
+                        
+                        rdfs:subPropertyOf owl:topDataProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000100
+
+<http://purl.obolibrary.org/obo/IAO_0000100> owl:equivalentClass datastarCore:Dataset .
+
+
+
+###  http://purl.obolibrary.org/obo/OBI_0000066
+
+<http://purl.obolibrary.org/obo/OBI_0000066> owl:equivalentClass datastarCore:Investigation .
+
+
+
+###  http://purl.org/ands/ontologies/vivo/ResearchDataSet
+
+<http://purl.org/ands/ontologies/vivo/ResearchDataSet> rdf:type owl:Class ;
+                                                       
+                                                       owl:equivalentClass datastarCore:Dataset .
+
+
+
+###  http://purl.org/datastar/Collection
+
+datastarCore:Collection rdf:type owl:Class ;
+                        
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                                          owl:someValuesFrom datastarCore:Dataset
+                                        ] .
+
+
+
+###  http://purl.org/datastar/Dataset
+
+datastarCore:Dataset rdf:type owl:Class ;
+                     
+                     owl:equivalentClass <http://vivoweb.org/ontology/core#Dataset> ;
+                     
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty datastarCore:temporalCoverage ;
+                                       owl:allValuesFrom [ rdf:type owl:Class ;
+                                                           owl:unionOf ( <http://vivoweb.org/ontology/core#DateTimeInterval>
+                                                                         <http://vivoweb.org/ontology/core#DateTimeValue>
+                                                                       )
+                                                         ]
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty datastarCore:geographicCoverage ;
+                                       owl:allValuesFrom <http://vivoweb.org/ontology/core#GeographicRegion>
+                                     ] .
+
+
+
+###  http://purl.org/datastar/DatasetStage
+
+datastarCore:DatasetStage rdf:type owl:Class .
+
+
+
+###  http://purl.org/datastar/DatasetURLLink
+
+datastarCore:DatasetURLLink rdf:type owl:Class ;
+                            
+                            rdfs:subClassOf <http://www.w3.org/2006/vcard/ns#URL> .
+
+
+
+###  http://purl.org/datastar/Investigation
+
+datastarCore:Investigation rdf:type owl:Class ;
+                           
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty datastarCore:geographicCoverage ;
+                                             owl:allValuesFrom <http://vivoweb.org/ontology/core#GeographicRegion>
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty datastarCore:temporalCoverage ;
+                                             owl:allValuesFrom [ rdf:type owl:Class ;
+                                                                 owl:unionOf ( <http://vivoweb.org/ontology/core#DateTimeInterval>
+                                                                               <http://vivoweb.org/ontology/core#DateTimeValue>
+                                                                             )
+                                                               ]
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty datastarCore:hasDataProduct ;
+                                             owl:allValuesFrom datastarCore:Dataset
+                                           ] .
+
+
+
+###  http://purl.org/datastar/Metadata
+
+datastarCore:Metadata rdf:type owl:Class .
+
+
+
+###  http://purl.org/datastar/MetadataURLLink
+
+datastarCore:MetadataURLLink rdf:type owl:Class ;
+                             
+                             rdfs:subClassOf <http://www.w3.org/2006/vcard/ns#URL> .
+
+
+
+###  http://purl.org/datastar/MethodStep
+
+datastarCore:MethodStep rdf:type owl:Class .
+
+
+
+###  http://purl.org/datastar/Methods
+
+datastarCore:Methods rdf:type owl:Class .
+
+
+
+###  http://purl.org/datastar/Repository
+
+datastarCore:Repository rdf:type owl:Class .
+
+
+
+###  http://purl.org/datastar/ResearchGroup
+
+datastarCore:ResearchGroup rdf:type owl:Class ;
+                           
+                           rdfs:subClassOf <http://xmlns.com/foaf/0.1/Group> ;
+                           
+                           rdfs:comment "This is a specific grouping of individuals that are working on a particular research group. A research group may span multiple organizations and may include any number of individuals. " .
+
+
+
+###  http://vivoweb.org/ontology/core#Dataset
+
+<http://vivoweb.org/ontology/core#Dataset> rdf:type owl:Class .
+
+
+
+###  http://vivoweb.org/ontology/core#DateTimeInterval
+
+<http://vivoweb.org/ontology/core#DateTimeInterval> rdf:type owl:Class .
+
+
+
+###  http://vivoweb.org/ontology/core#DateTimeValue
+
+<http://vivoweb.org/ontology/core#DateTimeValue> rdf:type owl:Class .
+
+
+
+###  http://vivoweb.org/ontology/core#GeographicRegion
+
+<http://vivoweb.org/ontology/core#GeographicRegion> rdf:type owl:Class .
+
+
+
+###  http://vivoweb.org/ontology/core#Project
+
+<http://vivoweb.org/ontology/core#Project> rdf:type owl:Class ;
+                                           
+                                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                             owl:onProperty datastarCore:hasDataProduct ;
+                                                             owl:allValuesFrom datastarCore:Dataset
+                                                           ] .
+
+
+
+###  http://www.w3.org/2006/vcard/ns#URL
+
+<http://www.w3.org/2006/vcard/ns#URL> rdf:type owl:Class .
+
+
+
+###  http://xmlns.com/foaf/0.1/Group
+
+<http://xmlns.com/foaf/0.1/Group> rdf:type owl:Class .
+
+
+
+###  http://xmlns.com/foaf/0.1/Person
+
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://purl.org/datastar/finalized
+
+datastarCore:finalized rdf:type datastarCore:DatasetStage ,
+                                owl:NamedIndividual .
+
+
+
+###  http://purl.org/datastar/processed
+
+datastarCore:processed rdf:type datastarCore:DatasetStage ,
+                                owl:NamedIndividual .
+
+
+
+###  http://purl.org/datastar/raw
+
+datastarCore:raw rdf:type datastarCore:DatasetStage ,
+                          owl:NamedIndividual .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>     
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+                PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        
+        SELECT DISTINCT ?temporalCoverageNode ?temporalCoverageNodeType ?label
+                        ?valueStart ?valueStartName
+                        ?dateTimeStart 
+                        ?precisionStart
+                        ?valueEnd ?valueEndName 
+                        ?dateTimeEnd 
+                        ?precisionEnd 
+                        (afn:localname(?dateTimePrecision) AS ?precision) 
+                        ?dateTime WHERE {
+            ?subject ?property ?temporalCoverageNode .
+            ?temporalCoverageNode vitro:mostSpecificType ?temporalCoverageNodeType
+                      
+            OPTIONAL { ?temporalCoverageNode core:start ?valueStart
+                           LET (?valueStartName := afn:localname(?valueStart)) 
+                       OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
+                       OPTIONAL { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
+                                      LET (?precisionStart := afn:localname(?dateTimePrecisionStart))  
+                       }
+            }                      
+            OPTIONAL { ?temporalCoverageNode core:end ?valueEnd
+                           LET (?valueEndName := afn:localname(?valueEnd))  
+                       OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
+                       OPTIONAL { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
+                                      LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
+                       }
+            }
+            OPTIONAL {?temporalCoverageNode rdfs:label ?label}
+            
+            OPTIONAL { ?temporalCoverageNode core:dateTime ?dateTime }
+            OPTIONAL { ?temporalCoverageNode core:dateTimePrecision ?dateTimePrecision }
+              
+
+            <critical-data-required>
+            FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) ||  bound(?dateTime) ) 
+            </critical-data-required>
+        }  
+    </query-select>
+    
+    <!-- From date time value -->
+     <query-construct>
+        CONSTRUCT {
+            ?subject ?property ?temporalCoverageNode .
+            ?temporalCoverageNode ?p ?o .
+        } WHERE {
+            {
+                ?subject ?property ?temporalCoverageNode  
+            } 
+            UNION {
+                ?subject ?property ?temporalCoverageNode .
+                ?temporalCoverageNode ?p ?o .
+            }
+        } 
+    </query-construct>
+
+	<!--  From date time interval  -->
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+        CONSTRUCT {
+            ?subject ?property ?temporalCoverageNode .
+            ?temporalCoverageNode core:start ?valueStart .
+            ?temporalCoverageNode core:end ?valueEnd .
+            ?temporalCoverageNode rdfs:label ?label
+        } WHERE {
+            {
+                ?subject ?property ?temporalCoverageNode
+            } 
+            UNION {
+                ?subject ?property ?temporalCoverageNode .
+                ?temporalCoverageNode core:start ?valueStart
+            }
+            UNION {
+                ?subject ?property ?temporalCoverageNode .
+                ?temporalCoverageNode core:end ?valueEnd
+            }
+            UNION {
+                ?subject ?property ?temporalCoverageNode .
+                ?temporalCoverageNode rdfs:label ?label
+            }
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+       
+        CONSTRUCT { 
+            ?valueStart ?p ?o
+        } WHERE {
+            ?subject ?property ?temporalCoverageNode .
+            ?temporalCoverageNode core:start ?valueStart .
+            ?valueStart ?p ?o
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+       
+        CONSTRUCT { 
+            ?valueEnd ?p ?o
+        } WHERE {
+            ?subject ?property ?temporalCoverageNode .
+            ?temporalCoverageNode core:end ?valueEnd .
+            ?valueEnd ?p ?o
+        }
+    </query-construct>
+
+    <template>propStatement-temporalCoverage.ftl</template>
+</list-view-config>

@@ -1,0 +1,39 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix datastarCore: <http://purl.org/datastar/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.org/datastar/> .
+
+### Inverse properties in the Protege output are defined
+### for one property, but not on the inverse itself. Defining
+### both here
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://purl.org/datastar/hasDataProduct
+
+datastarCore:hasDataProduct   owl:inverseOf  datastarCore:isDataProductOf  .
+
+datastarCore:isAssociatedMetadataFor owl:inverseOf datastarCore:hasAssociatedMetadata .
+
+datastarCore:isDerivedFrom owl:inverseOf datastarCore:hasDerivedDataset .
+
+datastarCore:hasInvestigation owl:inverseOf datastarCore:isInvestigationPartOf .
+
+datastarCore:metadataWebpage owl:inverseOf datastarCore:metadataWebpageOf .
+
+datastarCore:datasetWebpageOf owl:inverseOf datastarCore:datasetWebpage .
+
+<http://purl.org/spar/cito/citesAsDataSource> owl:inverseOf <http://purl.org/spar/cito/isCitedAsDataSourceBy> .
+
+<http://purl.org/spar/cito/documents> owl:inverseOf <http://purl.org/spar/cito/isDocumentedBy> .
+
+datastarCore:isPartOf owl:inverseOf datastarCore:hasPart .
+

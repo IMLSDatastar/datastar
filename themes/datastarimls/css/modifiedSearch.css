@@ -1,0 +1,139 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+
+/* Class and subclass refinement links */
+.searchTOC {    
+    float:left !important;
+    background:none !important;
+    margin-left:15px;
+    margin-right:50px;
+}
+
+.searchTOC ul {
+	margin-bottom: 5px !important; 
+}
+.searchTOC .searchFacet {
+	float:none;
+	clear:both;
+}
+
+/*
+.searchFacet ul {
+	background: #48AED4 !important;
+}*/
+
+.searchFacet ul li, .searchFacet ul li a, .searchFacet ul li a:active {
+	color:#FFFFFF !important;
+}
+
+.searchFacet ul li a {
+	text-decoration:none !important;
+}
+
+.searchFacet ul li {
+	background: #48AED4 !important;
+	margin-bottom: 5px;
+}
+
+/**For heading**/
+.searchFacet ul li.subcategory {
+	background: #545861 !important;
+}
+
+.searchFacet ul li:hover {
+	background-color:#FFFFFF !important;
+	color:#48AED4 !important;
+}
+
+/**No results item should not change color but should stay the same**/
+.searchFacet ul.noresults li:hover {
+	background: #48AED4 !important;
+	color:#FFFFFF !important;
+}
+
+.searchFacet ul li a:hover, .searchFacet ul li:hover a, .searchFacet ul li:hover a:active {
+	text-decoration:none !important;
+	color:#48AED4 !important;
+}
+.searchFacet h4{
+	color:#3d270d !important;
+	text-align:left;
+	margin: 0.5em 0 !important; /*Overwriting margin in normalize.css*/
+}
+
+.searchFacet {
+	/*border:1px solid #3d270d;*/
+	width: 192px;
+    /*height: 203px;*/
+    border: 1px solid rgba(203,213,164,.54); /* stroke */
+    -o-border-radius: 9px;
+    -ms-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+    border-radius: 9px; /* border radius */
+    -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+    background-clip: padding-box; /* prevents bg color from leaking outside the border */
+    background-color: #fff; /* layer fill content */
+    padding-left:3px;
+    margin-bottom: 5px;
+}
+/*Depends on whether this is true or not but we will see*/
+.contentsBrowseGroup {
+	height:1100px !important;
+}
+
+.scroll-up {
+   position:relative; 
+   width: 21px;
+   height: 30px;
+   top: 44px; /* changed for redesign, was 0 */
+   left:156px;
+}
+
+
+.roundedDiv {
+                -ms-moz-border-radius: 9px; /* border radius IE */
+                -o-moz-border-radius: 9px;/* border radius Opera*/
+                -moz-border-radius: 9px;/* border radius MOZILLA*/
+                -webkit-border-radius: 9px; /* border radius SFARI-CHROME*/
+                border-radius: 9px; /* border radius */
+}
+
+/*Styles partially borrowed from entymology site*/
+.searchFacet .internalInfo {
+	background-color:#FFFFFF;
+	color: #48AED4;
+	float:right;
+	font-size:0.8em;
+	padding-left:10px;
+	padding-right:10px;
+	margin-right:4px;
+/*	position:absolute;
+	top:7px;
+	right:5px;  */
+}
+/*Count span*/
+.searchFacet .countInfo {
+	
+}
+
+/*Removal span*/
+.searchFacet .remove {
+		font-weight:normal;
+		margin-right:1px;
+}
+
+ul.searchhits li {
+		list-style-type:none;
+}
+
+.searchFacet .selectedFacet {
+	font-weight:bold !important;
+}
+
+.selectedFacet {
+	color:#48AED4 !important;
+	font-size:14px !important;
+	font-weight:bold !important;
+}
