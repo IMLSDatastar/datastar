@@ -386,13 +386,16 @@ static HashMap<String, String> temporalCoverageFields = new HashMap<String, Stri
 	 
 	  //copied VivoAgentContextNode, instead of just picking datasets, extending to information content entities to
 	  //make more general
+	  //Updating here so that we can get the label of the author and NOT the label 
+	  //of the dataset
+	  //And also really looking at uris which are information entities
 	  String authorQuery =
 			  prefix +        "SELECT " +
 			            "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-			            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+			            " ?uri rdf:type obo:IAO_0000030  ; ?b ?c . " +
 			            " ?c rdf:type core:Authorship . " +
 			            " ?c core:relates ?h . " +
-			            " ?h rdf:type obo:IAO_0000030 . ?h rdfs:label ?ContextNodeProperty . }";
+			            " ?h rdf:type foaf:Agent . ?h rdfs:label ?ContextNodeProperty . }";
 			  
          
 	  //Temporal coverage queries

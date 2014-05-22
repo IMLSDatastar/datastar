@@ -24,6 +24,7 @@
 	-->
 	<property name="build.dir" location="./.build" />
 	<property name="appbase.dir" location="${build.dir}/appBase" />
+	<property name="solroverride.dir" location="${basedir}/solroverride" />
 
 	<!--
 		Load the properties from deploy.properties.
@@ -115,6 +116,25 @@
 		</copy>
 	</target>
 
+	<!-- - - - - - - - - - - - - - - - - - 
+		          target: prepareSolr   
+		          Override core version to enable copying over Solr customizations for a product                   
+		 - - - - - - - - - - - - - - - - - -->
+		<target name="prepareSolr" depends="prepare, buildProperties">
+			<!-- create an image of the Solr home directory -->
+				<copy todir="${solr.homeimage.dir}">
+					<fileset dir="${solr.template.dir}/homeDirectoryTemplate" />
+				</copy>
+			<!--Override with any files in the override directory-->
+				<copy todir="${solr.homeimage.dir}" overwrite="true">
+					<fileset dir="${solroverride.dir}" />
+				</copy>
+			<!-- create an unpacked image of the Solr WAR, with our config options -->
+			<unwar src="${solr.template.dir}/apache-solr-3.6.2.war" dest="${solr.webapp.dir}" />
+			<copy todir="${solr.webapp.dir}/WEB-INF/classes">
+				<fileset dir="${appbase.dir}/config/solr/" />
+			</copy>
+		</target>
 	<!-- ================================= 
 	      target: revisionInfo 
 	     
