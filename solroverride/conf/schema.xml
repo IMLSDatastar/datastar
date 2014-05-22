@@ -189,7 +189,6 @@
   <!-- ****************************  Vitro Fields *************************** -->
   
   <field name="DocId" type="string" indexed="true" stored="true" required="true" omitNorms="true"/> 
-  <field name="id" type="string" indexed="true" stored="true" required="true" omitNorms="true"/> 
   <field name="type" type="string" indexed="true" stored="true" omitNorms="true" multiValued="true"/>
   
   <field name="classgroup" type="string" indexed="true" stored="true" multiValued="true"/>
